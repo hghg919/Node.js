@@ -4,12 +4,12 @@ const {getAllContacts, createContact,getContact,updateContact,deleteContact,addC
 
 router
 .route("/")
-.get(getAllContacts)
-.post(createContact);
+.get(getAllContacts);
 
 router
 .route("/add")
-.get(addContactFrom);
+.get(addContactFrom)
+.post(createContact);
 
 router
 .route("/:id")

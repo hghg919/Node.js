@@ -15,7 +15,7 @@ const addContactFrom = (req, res) => {
 };
 
 // @desc Create a contact
-// @route POST /contacts
+// @route POST /contacts/add
 const createContact = asyncHandler(async (req, res) => {
   console.log(req.body);
   const { name, email, phone } = req.body;
@@ -27,14 +27,14 @@ const createContact = asyncHandler(async (req, res) => {
     email,
     phone,
   });
-  res.status(201).send("Create Contacts");
+  res.redirect("/contacts");
 });
 
 // @desc Get contact
 // @route GET /contacts/:id
 const getContact = asyncHandler(async (req, res) => {
   const contact = await Contact.findById(req.params.id);
-  res.status(200).send(contact);
+  res.render("update", {contact: contact});
 });
 
 // @desc Update contact
@@ -48,19 +48,14 @@ const updateContact = asyncHandler(async (req, res) => {
     { name, email, phone },
     { new: true }
   );
-  res.status(200).send(updatedContact);
+  res.redirect("/contacts");
 });
 
 // @desc Delete contact
 // @route DELETE /contacts/:id
 const deleteContact = asyncHandler(async (req, res) => {
-  const contact = await Contact.findById(req.params.id);
-  if (!contact) {
-    res.status(404);
-    throw new Error("Contact not found");
-  }
-  await Contact.deleteOne();
-  res.status(200).send(`Delete Contact for ID: ${req.params.id}`);
+  await Contact.findOneAndDelete(req.params.id);
+  res.redirect("/contacts");
 });
 
 module.exports = {
