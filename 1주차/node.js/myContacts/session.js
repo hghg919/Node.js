@@ -1,6 +1,6 @@
 const express = require("express");
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo").default;
 require("dotenv").config();
 
 const app = express();
@@ -9,7 +9,7 @@ app.use(
   session({
     secret: "secret code",
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
     store: MongoStore.create({ mongoUrl: process.env.DB_CONNECT }),
     cookie: { MaxAge: 60 * 60 * 24 * 1000 },
   })
