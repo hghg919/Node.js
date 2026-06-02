@@ -11,11 +11,14 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cookie-parser": "^1.4.7",
     "dotenv": "^17.4.2",
     "ejs": "^5.0.2",
     "express": "^5.2.1",
     "express-async-handler": "^1.2.0",
     "express-ejs-layouts": "^2.5.1",
+    "jsonwebtoken": "^9.0.3",
     "mogoose": "^0.0.1-security",
     "mongoose": "^9.6.2"
   }
